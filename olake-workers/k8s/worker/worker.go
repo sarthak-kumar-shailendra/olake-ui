@@ -29,9 +29,10 @@ type K8sWorker struct {
 
 // NewK8sWorkerWithConfig creates a new K8s worker with full configuration
 func NewK8sWorker(cfg *config.Config) (*K8sWorker, error) {
-	cfg.Kubernetes.JobMapping = k8s.LoadJobMapping(cfg)
-	cfg.Worker.WorkerIdentity = fmt.Sprintf("olake.io/olake-workers/%s", cfg.Worker.WorkerIdentity)
+	cfg.Kubernetes.JobMapping = k8s.GetValidJobMapping(cfg)
+	logger.Info("valid job mapping are: %v", cfg.Kubernetes.JobMapping)
 
+	cfg.Worker.WorkerIdentity = fmt.Sprintf("olake.io/olake-workers/%s", cfg.Worker.WorkerIdentity)
 	logger.Infof("Connecting to Temporal at: %s", cfg.Temporal.Address)
 
 	// Create database connection

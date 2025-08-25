@@ -29,9 +29,9 @@ func parseTimeout(envKey string, defaultValue time.Duration) time.Duration {
 func GetActivityTimeout(operation string) time.Duration {
 	switch operation {
 	case "discover":
-		return parseTimeout("timeouts.activity.discover", 2*time.Hour)
+		return parseTimeout("timeouts.activity.discover", 10*time.Minute)
 	case "test":
-		return parseTimeout("timeouts.activity.test", 2*time.Hour)
+		return parseTimeout("timeouts.activity.test", 5*time.Minute)
 	case "sync":
 		return parseTimeout("timeouts.activity.sync", 700*time.Hour)
 	default:
